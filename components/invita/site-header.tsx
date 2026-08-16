@@ -7,8 +7,6 @@ import { BRAND_NAME } from "@/lib/invita"
 
 const links = [
   ["Plantillas", "/plantillas"],
-  ["Cómo funciona", "/#como-funciona"],
-  ["Características", "/#caracteristicas"],
   ["Opiniones", "/#opiniones"],
   ["Precios", "/#precios"],
 ]
