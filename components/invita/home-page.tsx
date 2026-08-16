@@ -1,12 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, CalendarPlus, CheckCircle2, MessageCircle, Palette, UsersRound } from "lucide-react"
+import { ArrowRight, CalendarPlus, MessageCircle, Palette, UsersRound } from "lucide-react"
 import { SiteHeader } from "./site-header"
 import { SiteFooter } from "./site-footer"
 import { Reveal } from "./reveal"
 import { TemplateRail } from "./template-rail"
-import { InvitationDemo } from "./invitation-demo"
-import { templates, testimonials } from "@/lib/invita"
+import { templates } from "@/lib/invita"
 
 const quickBenefits = [
   [Palette, "Personaliza en minutos"], [UsersRound, "Confirma con RSVP"], [MessageCircle, "Comparte por WhatsApp"], [CalendarPlus, "Ubicación y calendario"],
@@ -46,10 +45,6 @@ export function HomePage() {
           {[{name:"Elegante",img:templates[0].image,cls:"md:col-span-2 md:row-span-2"},{name:"Floral",img:templates[1].image,cls:"md:col-span-2"},{name:"Minimalista",img:templates[3].image,cls:""},{name:"Moderno",img:templates[4].image,cls:""}].map((item)=><Link key={item.name} href={`/plantillas?estilo=${item.name}`} className={`group relative overflow-hidden rounded-[1.75rem] ${item.cls}`}><Image src={item.img} alt={`Colección ${item.name}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"/><span className="absolute bottom-5 left-5 font-serif text-3xl text-white">{item.name}</span></Link>)}
         </div></Reveal>
       </section>
-
-      <section className="bg-[#211f1c] px-6 py-24 md:py-32"><div className="mx-auto max-w-7xl"><InvitationDemo/></div></section>
-
-      <section id="opiniones" className="bg-[#f4f0e8] px-6 py-24 md:py-32"><div className="mx-auto max-w-7xl"><p className="eyebrow">Historias que ya comenzaron</p><div className="mt-12 grid gap-5 lg:grid-cols-3">{testimonials.map((item,i)=><Reveal key={item.author} delay={i*.08} className="flex min-h-[320px] flex-col justify-between rounded-[2rem] bg-[#fffdf8] p-8"><CheckCircle2 className="size-6 text-primary"/><blockquote className="mt-12 font-serif text-2xl leading-snug">“{item.quote}”</blockquote><footer className="mt-8 text-xs"><strong className="block">{item.author}</strong><span className="text-muted-foreground">{item.event}</span></footer></Reveal>)}</div></div></section>
 
       <section id="precios" className="relative overflow-hidden bg-[#6d2f3f] px-6 py-24 text-white md:py-32"><div className="mx-auto max-w-7xl"><p className="eyebrow text-white/55">Desde $350 MXN · Pago único</p><h2 className="mt-6 max-w-5xl font-serif text-5xl leading-[.95] md:text-8xl">Haz que tu evento comience desde la invitación.</h2><div className="mt-10 flex flex-wrap gap-3"><Link href="/editor/jardin-eterno" className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black">Crear mi invitación</Link><Link href="/plantillas" className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm">Ver plantillas <ArrowRight className="size-4"/></Link></div></div></section>
       <SiteFooter />
