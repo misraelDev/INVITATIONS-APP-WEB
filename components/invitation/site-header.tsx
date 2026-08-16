@@ -6,7 +6,7 @@ import { useState } from "react"
 import { BRAND_NAME } from "@/lib/invita"
 
 const links = [
-  ["Plantillas", "/plantillas"],
+  ["Plantillas", "/templates"],
   ["Precios", "/#precios"],
 ]
 

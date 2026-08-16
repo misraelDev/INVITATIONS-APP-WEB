@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { InvitationEditor } from "@/components/invita/invitation-editor"
+import { InvitationEditor } from "@/components/invitation/invitation-editor"
 import { getTemplate, templates } from "@/lib/invita"
 
 export function generateStaticParams() { return templates.map(({ slug }) => ({ slug })) }

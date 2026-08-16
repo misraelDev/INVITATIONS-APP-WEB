@@ -15,7 +15,7 @@ export function TemplateCard({ template, priority = false }: { template: Invitat
         </div>
         <div className="flex items-end justify-between gap-4">
           <div><h3 className="font-serif text-3xl">{template.name}</h3><p className="mt-1 text-sm text-white/70">Desde {formatPrice(template.price)}</p></div>
-          <Link href={`/plantillas/${template.slug}`} className="grid size-12 shrink-0 place-items-center rounded-full bg-white text-black transition-transform group-hover:rotate-6" aria-label={`Ver plantilla ${template.name}`}>
+          <Link href={`/templates/${template.slug}`} className="grid size-12 shrink-0 place-items-center rounded-full bg-white text-black transition-transform group-hover:rotate-6" aria-label={`Ver plantilla ${template.name}`}>
             <ArrowUpRight className="size-5" />
           </Link>
         </div>
