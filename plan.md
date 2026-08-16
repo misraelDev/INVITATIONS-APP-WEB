@@ -194,10 +194,10 @@ RUTAS
 Crea las siguientes rutas:
 
 * `/` — página principal
-* `/plantillas` — catálogo completo
-* `/plantillas/[slug]` — detalle de plantilla
+* `/templates` — catálogo completo
+* `/templates/[slug]` — detalle de plantilla
 * `/editor/[slug]` — personalizador
-* `/invitacion/[slug]` — invitación publicada
+* `/invitation/[slug]` — invitación publicada
 
 REQUISITOS FUNCIONALES
 

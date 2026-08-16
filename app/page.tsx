@@ -1,4 +1,4 @@
-import { HomePage as InvitaHomePage } from "@/components/invita/home-page"
+import { HomePage as InvitaHomePage } from "@/components/invitation/home-page"
 
 export default function HomePage() {
   return <InvitaHomePage />

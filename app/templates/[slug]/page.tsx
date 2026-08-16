@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
-import { SiteHeader } from "@/components/invita/site-header"
-import { SiteFooter } from "@/components/invita/site-footer"
-import { TemplateDetail } from "@/components/invita/template-detail"
+import { SiteHeader } from "@/components/invitation/site-header"
+import { SiteFooter } from "@/components/invitation/site-footer"
+import { TemplateDetail } from "@/components/invitation/template-detail"
 import { getTemplate, templates } from "@/lib/invita"
 
 export function generateStaticParams() { return templates.map(({ slug }) => ({ slug })) }

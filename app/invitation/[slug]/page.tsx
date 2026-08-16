@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { PublishedInvitation } from "@/components/invita/published-invitation"
+import { PublishedInvitation } from "@/components/invitation/published-invitation"
 import { getTemplate, templates } from "@/lib/invita"
 
 export function generateStaticParams() { return templates.map(({ slug }) => ({ slug })) }
