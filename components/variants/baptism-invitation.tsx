@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { CalendarPlus, Check, Church, Copy, Feather, Gift, MapPin, MessageCircle, Sparkles, Users } from "lucide-react"
 import { useEffect, useMemo, useState, type FormEvent } from "react"
 
@@ -95,7 +95,6 @@ function HaloGlow() {
 
 export function BaptismInvitation() {
   const reduceMotion = useReducedMotion()
-  const [opened, setOpened] = useState(false)
   const [countdown, setCountdown] = useState<Countdown>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [guest, setGuest] = useState("")
   const [companions, setCompanions] = useState("0")
@@ -144,53 +143,12 @@ export function BaptismInvitation() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#faf5e9] text-[#3a2e1f]">
-      <AnimatePresence>
-        {!opened && (
-          <motion.section
-            className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-[#f4ecd8] px-5"
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
-            transition={{ duration: 0.8 }}
-          >
-            <SparkleField />
-            <div className="relative w-full max-w-[420px] text-center">
-              <HaloGlow />
-              <motion.div
-                initial={reduceMotion ? false : { scale: 0.85, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="relative"
-              >
-                <div className="mx-auto size-64 overflow-hidden rounded-full border-4 border-[#f0d68a] shadow-[0_0_60px_rgba(240,214,138,0.55)] sm:size-72">
-                  <Image src={EVENT.photo} alt={EVENT.name} width={400} height={400} priority className="size-full object-cover" />
-                </div>
-                <p className="relative mt-6 text-xs font-semibold uppercase tracking-[.5em] text-[#b8912f]">Bautizo</p>
-                <p className="relative mt-2 bg-[linear-gradient(90deg,#b8912f,#f0d68a,#b8912f)] bg-[length:200%_auto] bg-clip-text font-serif text-6xl italic text-transparent [animation:shimmer_3.5s_linear_infinite]">
-                  {EVENT.name}
-                </p>
-                <p className="relative mt-3 text-xs uppercase tracking-[.25em] text-[#6b5a3d]">
-                  {EVENT.day}/{EVENT.month === "Marzo" ? "03" : EVENT.month}/{EVENT.year} · {EVENT.time}
-                </p>
-              </motion.div>
-              <motion.button
-                whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
-                type="button"
-                onClick={() => setOpened(true)}
-                className="relative z-10 mt-10 inline-flex items-center gap-2 rounded-full border border-[#b8912f]/50 bg-gradient-to-r from-[#f0d68a] to-[#d8b45a] px-8 py-3.5 text-xs font-bold uppercase tracking-[.2em] text-[#3a2e1f] shadow-lg transition"
-              >
-                <Sparkles className="size-4" /> Abrir invitación
-              </motion.button>
-            </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
-
       <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-5 py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(240,214,138,0.35),transparent_55%)]" />
         <SparkleField />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-          animate={opened || reduceMotion ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15 }}
           className="relative mx-auto w-full max-w-2xl text-center"
         >

@@ -1,22 +1,13 @@
 "use client"
 
 import Image from "next/image"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { Check, Copy, Flag, Gift, MapPin, MessageCircle, Users } from "lucide-react"
-import { useEffect, useState, type FormEvent } from "react"
-
-const EVENT = {
-  name: "Noah",
-  age: 6,
-  date: "Sábado 13 de marzo",
-  weekday: "Sábado",
-  day: "13",
-  month: "Marzo 2027",
-  time: "15:30 h",
-  target: "2027-03-13T15:30:00-06:00",
-  venue: "Pista Turbo Kids",
-  address: "Av. de la Velocidad 95, Ciudad de México",
-}
+import { motion, useReducedMotion } from "framer-motion"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheck, faFlagCheckered, faGaugeHigh, faLocationDot, faStopwatch, faTrophy } from "@fortawesome/free-solid-svg-icons"
+import { faCalendarDays, faClock, faCopy } from "@fortawesome/free-regular-svg-icons"
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons"
+import { useEffect, useState } from "react"
+import { RACING_EVENT as EVENT } from "./racing-data"
 
 type Countdown = { days: number; hours: number; minutes: number; seconds: number }
 
@@ -32,13 +23,7 @@ function getCountdown(): Countdown {
 
 export function RacingInvitation() {
   const reduceMotion = useReducedMotion()
-  const [opened, setOpened] = useState(false)
   const [countdown, setCountdown] = useState<Countdown>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-  const [guest, setGuest] = useState("")
-  const [companions, setCompanions] = useState("0")
-  const [error, setError] = useState("")
-  const [confirmed, setConfirmed] = useState(false)
-  const [copied, setCopied] = useState(false)
   const [addressCopied, setAddressCopied] = useState(false)
 
   useEffect(() => {
@@ -48,22 +33,6 @@ export function RacingInvitation() {
     return () => window.clearInterval(timer)
   }, [])
 
-  const confirm = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (guest.trim().length < 2) {
-      setError("Escribe tu nombre para apartar tu lugar en la parrilla.")
-      return
-    }
-    setError("")
-    setConfirmed(true)
-  }
-
-  const copyLink = async () => {
-    await navigator.clipboard.writeText(window.location.href)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 2_000)
-  }
-
   const copyAddress = async () => {
     await navigator.clipboard.writeText(`${EVENT.venue}, ${EVENT.address}`)
     setAddressCopied(true)
@@ -71,56 +40,39 @@ export function RacingInvitation() {
   }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#f7f0df] text-[#171717]">
-      <AnimatePresence>
-        {!opened && (
-          <motion.section
-            className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-[#f5dfb6] px-5"
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(115deg,transparent_45%,#e1b7a5_46%,transparent_49%),linear-gradient(25deg,transparent_45%,#c8d7d2_46%,transparent_49%)] [background-size:180px_180px]" />
-            <div className="relative w-full max-w-[430px] pt-28 text-center">
-              <motion.div initial={reduceMotion ? false : { y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="absolute inset-x-8 top-0 z-0 rounded-t-[2rem] bg-[#fff7e8] px-6 pb-24 pt-7 shadow-xl">
-                <p className="text-[10px] font-black uppercase tracking-[.28em] text-[#be1713]">Pase de piloto</p>
-                <p className="mt-2 text-2xl font-black italic uppercase">Gran Premio de {EVENT.name}</p>
-              </motion.div>
-              <div className="relative z-10 h-[285px] rounded-[1.8rem] bg-[#d91a16] shadow-[0_30px_70px_rgba(100,12,8,.35)]">
-                <div className="absolute inset-x-0 top-0 h-0 border-l-[195px] border-r-[195px] border-t-[145px] border-l-transparent border-r-transparent border-t-[#f23827] drop-shadow-lg sm:border-l-[215px] sm:border-r-[215px]" />
-                <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/25 bg-black/10 px-5 py-5 text-white backdrop-blur-sm">
-                  <p className="text-[10px] uppercase tracking-[.3em] text-white/70">Invitación especial</p>
-                  <p className="mt-2 text-sm">Haz clic para encender motores</p>
-                </div>
-              </div>
-              <motion.button whileHover={reduceMotion ? undefined : { scale: 1.04 }} whileTap={{ scale: 0.97 }} type="button" onClick={() => setOpened(true)} className="relative z-20 -mt-8 inline-flex items-center gap-3 rounded-full border-4 border-[#f7f0df] bg-[#ffbf19] px-7 py-4 text-sm font-black uppercase tracking-[.08em] shadow-xl">
-                <Flag className="size-5" /> Abrir invitación
-              </motion.button>
+    <main className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f2d9b5_0%,#f2d9b5_22%,#d91a16_34%,#d91a16_52%,#f2d9b5_63%,#f2d9b5_78%,#d91a16_90%,#d91a16_100%)] text-[#171717]">
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden px-5 py-20 lg:py-12">
+        <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(125deg,transparent_64%,#d9a8a0_65%,transparent_78%)]" />
+        <div className="absolute -bottom-20 -left-[20%] h-[48%] w-[140%] rotate-3 bg-[#d91a16] lg:-right-[12%] lg:-top-[10%] lg:bottom-auto lg:left-auto lg:h-[120%] lg:w-[62%] lg:-rotate-6" />
+        <FontAwesomeIcon icon={faGaugeHigh} className="absolute -left-12 top-20 -rotate-12 text-[11rem] text-[#d91a16]/5 lg:left-[42%] lg:top-12 lg:text-[16rem] lg:text-white/8" aria-hidden="true" />
+        <FontAwesomeIcon icon={faFlagCheckered} className="absolute right-[8%] top-[10%] hidden rotate-12 text-[5rem] text-white/10 lg:block" aria-hidden="true" />
+        <FontAwesomeIcon icon={faTrophy} className="absolute bottom-[12%] right-[4%] hidden -rotate-6 text-[4rem] text-[#ffbf19]/25 lg:block" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-12 bg-[url('/variants/racing/checker.svg')] bg-[length:64px_64px]" />
+        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="relative z-20 pt-6 lg:py-16">
+            <p className="text-[10px] font-black uppercase tracking-[.3em] text-[#d91a16]">Invitación oficial · Piloto Nº {EVENT.age}</p>
+            <div className="relative -ml-3 mt-5 w-full max-w-[500px]">
+              <Image src="/variants/racing/name-plate.svg" alt="Placa de piloto" width={760} height={270} priority className="w-full" />
+              <h1 className="absolute inset-x-0 top-[22%] text-center font-serif text-[clamp(2.8rem,8vw,5.2rem)] italic leading-none text-white drop-shadow-md">{EVENT.name}</h1>
             </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
+            <h2 className="mt-3 max-w-xl text-5xl font-black italic uppercase leading-[.82] tracking-[-.06em] sm:text-7xl lg:text-8xl">Seis años a toda velocidad.</h2>
+            <a href="#fecha" className="mt-12 inline-flex items-center gap-2 rounded-full bg-[#171717] px-6 py-3.5 text-sm font-black uppercase tracking-wide text-white shadow-lg transition-transform hover:-translate-y-1">Ver pase de carrera <FontAwesomeIcon icon={faFlagCheckered} size="lg" widthAuto /></a>
+          </div>
 
-      <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f2d9b5] px-5 py-20">
-        <div className="absolute inset-0 opacity-35 [background-image:radial-gradient(circle_at_20%_20%,#fff_0_7%,transparent_8%),linear-gradient(125deg,transparent_60%,#d9a8a0_61%,transparent_75%)] [background-size:260px_260px,100%_100%]" />
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-[url('/variants/racing/checker.svg')] bg-[length:80px_80px] opacity-20" />
-        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 40 }} animate={opened || reduceMotion ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="relative mx-auto w-full max-w-5xl text-center">
-          <div className="relative mx-auto max-w-2xl">
-            <Image src="/variants/racing/name-plate.svg" alt="Placa de piloto" width={760} height={270} priority className="w-full" />
-            <h1 className="absolute inset-x-0 top-[23%] font-serif text-[clamp(3rem,11vw,6rem)] italic leading-none text-white drop-shadow-md">{EVENT.name}</h1>
+          <div className="relative z-10 flex min-h-[380px] items-end justify-center lg:min-h-[680px] lg:items-center">
+            <span className="absolute right-0 top-2 text-[13rem] font-black italic leading-none tracking-[-.12em] text-white/10 sm:text-[18rem] lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:text-[25rem]" aria-hidden="true">06</span>
+            <div className="relative w-full max-w-[760px] lg:translate-x-10">
+              <div className="absolute bottom-[12%] left-[10%] right-[5%] h-10 rounded-[50%] bg-black/25 blur-xl" />
+              <Image src="/variants/racing/race-car.svg" alt={`Auto de carreras número ${EVENT.age}`} width={900} height={380} priority className="relative w-full -rotate-2 drop-shadow-2xl transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]" />
+              <span className="absolute bottom-[12%] right-[8%] -rotate-3 rounded-md bg-[#ffbf19] px-4 py-2 text-[10px] font-black uppercase tracking-[.16em] text-[#171717] shadow-lg">Piloto oficial</span>
+            </div>
           </div>
-          <div className="relative z-10 -mt-10">
-            <p className="mx-auto w-fit -rotate-2 rounded-lg bg-[#171717] px-5 py-2 text-sm font-black uppercase tracking-[.15em] text-white shadow-lg">Cumple {EVENT.age} años</p>
-            <Image src="/variants/racing/race-car.svg" alt={`Auto de carreras número ${EVENT.age}`} width={900} height={380} priority className="mx-auto mt-2 w-full max-w-4xl" />
-          </div>
-          <p className="mx-auto -mt-4 max-w-lg text-balance text-lg font-medium">Ajusta tu casco. Tenemos una misión: celebrar a toda velocidad.</p>
-          <a href="#fecha" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#d91a16] px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-lg transition-transform hover:-translate-y-1">Ver pase de carrera <Flag className="size-4" /></a>
         </motion.div>
       </section>
 
-      <section id="fecha" className="relative bg-[#d91a16] px-5 py-20 text-white">
-        <div className="absolute inset-x-0 top-0 h-5 bg-[url('/variants/racing/checker.svg')] bg-[length:40px_40px]" />
+      <section id="fecha" className="relative px-5 py-20 text-white">
         <div className="mx-auto max-w-6xl text-center">
-          <p className="text-xs font-black uppercase tracking-[.28em] text-[#ffcf3f]">La carrera comienza en</p>
+          <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[.28em] text-[#ffcf3f]"><FontAwesomeIcon icon={faStopwatch} size="xl" widthAuto/>La carrera comienza en</p>
           <div className="mt-9 grid grid-cols-4 gap-2 sm:gap-4">
             {Object.entries(countdown).map(([label, value]) => (
               <div key={label} className="rounded-2xl border border-white/20 bg-[#b70f0c] p-3 shadow-inner sm:p-6">
@@ -131,13 +83,13 @@ export function RacingInvitation() {
           </div>
           <div className="mt-14 grid gap-3 text-left md:grid-cols-3">
             {[
-              { number: "01", label: "Fecha de carrera", code: EVENT.day, title: EVENT.weekday, detail: EVENT.month, serial: "FECHA 0013 2027" },
-              { number: "02", label: "Hora de salida", code: "GO", title: EVENT.time, detail: "Llega 15 minutos antes", serial: "SALIDA 1530 BOX A" },
-              { number: "03", label: "Circuito", code: "P1", title: EVENT.venue, detail: EVENT.address, serial: "PISTA TURBO ACCESO" },
+              { icon: faCalendarDays, number: "01", label: "Fecha de carrera", code: EVENT.day, title: EVENT.weekday, detail: EVENT.month, serial: "FECHA 0013 2027" },
+              { icon: faClock, number: "02", label: "Hora de salida", code: "GO", title: EVENT.time, detail: "Llega 15 minutos antes", serial: "SALIDA 1530 BOX A" },
+              { icon: faLocationDot, number: "03", label: "Circuito", code: "P1", title: EVENT.venue, detail: EVENT.address, serial: "PISTA TURBO ACCESO" },
             ].map((card) => (
               <div key={card.number} className="relative min-h-72 overflow-hidden rounded-[2rem] border-4 border-[#d91a16] bg-[#fff7e8] p-6 text-[#171717] shadow-2xl">
                 <div className="absolute -right-10 -top-10 size-28 rotate-12 bg-[#ffbf19]" />
-                <div className="relative flex items-center justify-between"><div className="flex items-center gap-2"><span className="grid size-8 place-items-center rounded-lg bg-[#d91a16] text-[10px] font-black text-white">{card.number}</span><p className="text-[10px] font-black uppercase tracking-[.2em] text-black/45">{card.label}</p></div><span className="relative z-10 text-xl font-black italic">Nº {EVENT.age}</span></div>
+                <div className="relative flex items-center justify-between"><div className="flex items-center gap-2"><span className="grid size-9 place-items-center rounded-lg bg-[#d91a16] text-white"><FontAwesomeIcon icon={card.icon} size="lg" widthAuto/></span><div><span className="text-[8px] font-black text-[#d91a16]">{card.number}</span><p className="text-[10px] font-black uppercase tracking-[.16em] text-black/45">{card.label}</p></div></div><span className="relative z-10 text-xl font-black italic">Nº {EVENT.age}</span></div>
                 <div className="relative mt-9 grid grid-cols-[68px_1fr] gap-4">
                   <div className="grid h-24 place-items-center rounded-xl bg-[#d91a16] text-4xl font-black italic text-white">{card.code}</div>
                   <div className="self-center"><p className={`font-black uppercase leading-tight ${card.number === "03" ? "text-lg" : "text-2xl"}`}>{card.title}</p><p className="mt-2 text-xs font-bold leading-5 text-black/45">{card.detail}</p></div>
@@ -149,7 +101,7 @@ export function RacingInvitation() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f7f0df] px-5 py-24 text-[#171717]">
+      <section className="relative overflow-hidden px-5 py-24 text-[#171717]">
         <div className="absolute -right-20 -top-20 size-72 rounded-full border-[45px] border-[#d91a16]/5" />
         <div className="relative mx-auto max-w-5xl">
           <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border-4 border-[#d91a16] bg-white shadow-2xl">
@@ -164,46 +116,22 @@ export function RacingInvitation() {
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <button type="button" onClick={copyAddress} className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#d91a16] bg-white px-6 py-4 text-sm font-black text-[#d91a16] transition hover:bg-[#d91a16]/5">
-              {addressCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
+              <FontAwesomeIcon icon={addressCopied ? faCheck : faCopy} size="lg" widthAuto />
               {addressCopied ? "Dirección copiada" : "Copiar dirección"}
             </button>
             <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${EVENT.venue}, ${EVENT.address}`)}`} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d91a16] px-6 py-4 text-sm font-black text-white transition hover:-translate-y-0.5">
-              <MapPin className="size-4" /> Abrir Maps
+              <FontAwesomeIcon icon={faLocationDot} size="lg" widthAuto /> Abrir Maps
             </a>
           </div>
         </div>
+        <div className="absolute inset-x-0 bottom-0 h-12 bg-[url('/variants/racing/checker.svg')] bg-[length:64px_64px]" />
       </section>
 
-      <section className="bg-[#ffbf19] px-5 py-20">
-        <div className="mx-auto max-w-4xl rounded-[2.5rem] border-4 border-[#171717] bg-[#f7f0df] p-7 shadow-[12px_12px_0_#171717] sm:p-12">
-          <div className="grid gap-10 md:grid-cols-[.8fr_1.2fr] md:items-center">
-            <div><Gift className="size-9 text-[#d91a16]"/><h2 className="mt-5 text-4xl font-black italic uppercase">Regalos de alto octanaje</h2><p className="mt-4 text-sm leading-6 text-black/60">Tu presencia es el mejor regalo. Si quieres tener un detalle, a Noah le encantan los bloques, cuentos y aventuras sobre ruedas.</p></div>
-            <div className="rounded-[2rem] bg-[#d91a16] p-7 text-white">
-              {confirmed ? (
-                <div className="py-10 text-center" role="status"><Check className="mx-auto size-12 text-[#ffbf19]"/><h3 className="mt-5 text-3xl font-black italic uppercase">¡Lugar en la parrilla!</h3><p className="mt-3 text-sm text-white/70">{guest}, registramos tu asistencia con {companions} acompañante{companions === "1" ? "" : "s"}.</p></div>
-              ) : (
-                <form onSubmit={confirm} noValidate>
-                  <p className="text-xs font-black uppercase tracking-[.2em] text-[#ffcf3f]">Confirmar asistencia</p>
-                  <label className="mt-6 block text-xs font-bold">Nombre del piloto<input value={guest} onChange={(event) => setGuest(event.target.value)} className="mt-2 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:bg-white/15" placeholder="Tu nombre" aria-invalid={!!error} /></label>
-                  {error && <p role="alert" className="mt-2 text-xs text-[#ffcf3f]">{error}</p>}
-                  <label className="mt-4 block text-xs font-bold">Acompañantes<select value={companions} onChange={(event) => setCompanions(event.target.value)} className="mt-2 w-full rounded-xl border border-white/20 bg-[#a90e0b] px-4 py-3 text-sm text-white"><option>0</option><option>1</option><option>2</option><option>3</option></select></label>
-                  <button className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ffbf19] px-5 py-3.5 text-sm font-black uppercase text-black"><Users className="size-4"/>Confirmar lugar</button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer className="relative bg-[#d91a16] px-5 pb-16 pt-24 text-center text-white">
-        <div className="absolute inset-x-0 top-0 h-8 bg-[url('/variants/racing/checker.svg')] bg-[length:64px_64px]" />
+      <footer className="relative px-5 pb-16 pt-24 text-center text-white">
         <Image src="/variants/racing/race-car.svg" alt="" width={900} height={380} className="mx-auto w-56" aria-hidden="true" />
+        <FontAwesomeIcon icon={faTrophy} size="2xl" className="mx-auto mt-2 text-[#ffcf3f]"/>
         <p className="mt-3 text-4xl font-black italic uppercase text-[#ffcf3f]">¡Nos vemos en la meta!</p>
-        <p className="mt-3 text-sm text-white/70">Comparte este pase con tu copiloto.</p>
-        <div className="mt-6 flex justify-center gap-2">
-          <a href={`https://wa.me/?text=${encodeURIComponent(`¡Acompáñanos al Gran Premio de ${EVENT.name}! ${EVENT.date} a las ${EVENT.time}.`)}`} target="_blank" rel="noreferrer" className="grid size-12 place-items-center rounded-full bg-[#1f9f59]" aria-label="Compartir por WhatsApp"><MessageCircle className="size-5"/></a>
-          <button type="button" onClick={copyLink} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 text-xs"><Copy className="size-4"/>{copied ? "Enlace copiado" : "Copiar enlace"}</button>
-        </div>
+        <a href={`https://wa.me/?text=${encodeURIComponent(`Hola, confirmo mi asistencia al Gran Premio de ${EVENT.name} el ${EVENT.date} a las ${EVENT.time}.`)}`} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-3 rounded-full bg-[#1f9f59] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-lg transition hover:-translate-y-1"><FontAwesomeIcon icon={faWhatsapp} size="xl" widthAuto/>Confirmar por WhatsApp</a>
       </footer>
     </main>
   )

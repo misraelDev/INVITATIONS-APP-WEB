@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import { RacingInvitation } from "@/components/variants/racing-invitation"
+import { RacingWelcome } from "@/components/variants/racing-welcome"
 
 export const metadata: Metadata = {
-  title: "Gran Premio de Noah | Invitación",
+  title: "Gran Premio de Noah | Pase de piloto",
   description: "Acompáñanos a celebrar el cumpleaños número 6 de Noah.",
 }
 
 export default function RacingVariantPage() {
-  return <RacingInvitation />
+  return <RacingWelcome />
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Calendar, Check, Copy, Gift, Heart, MapPin, MessageCircle, Users } from "lucide-react"
 import { useEffect, useState, type FormEvent } from "react"
 
@@ -63,7 +63,6 @@ function getCountdown(): Countdown {
 
 export function WeddingInvitation() {
   const reduceMotion = useReducedMotion()
-  const [opened, setOpened] = useState(false)
   const [countdown, setCountdown] = useState<Countdown>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [guest, setGuest] = useState("")
   const [companions, setCompanions] = useState("0")
@@ -104,49 +103,12 @@ export function WeddingInvitation() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7f4ee] text-[#26343d]">
-      <AnimatePresence>
-        {!opened && (
-          <motion.section
-            className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-[#26343d] px-5"
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
-            transition={{ duration: 0.7 }}
-          >
-            <Image src={EVENT.hero} alt="" fill priority className="absolute inset-0 object-cover opacity-40" />
-            <div className="relative w-full max-w-[420px] text-center text-white">
-              <motion.div
-                initial={reduceMotion ? false : { scale: 0.85, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="mx-auto grid size-64 place-items-center rounded-full border border-white/40 bg-black/20 backdrop-blur-sm sm:size-72"
-              >
-                <div>
-                  <p className="text-[10px] uppercase tracking-[.4em] text-white/70">Nos casamos</p>
-                  <p className="mt-3 font-serif text-4xl italic sm:text-5xl">
-                    {EVENT.bride} &amp; {EVENT.groom}
-                  </p>
-                  <p className="mt-3 text-xs uppercase tracking-[.25em] text-white/70">{EVENT.date}</p>
-                </div>
-              </motion.div>
-              <motion.button
-                whileHover={reduceMotion ? undefined : { scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                type="button"
-                onClick={() => setOpened(true)}
-                className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/50 px-8 py-3 text-xs font-semibold uppercase tracking-[.2em] text-white transition hover:bg-white/10"
-              >
-                Abrir invitación
-              </motion.button>
-            </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
-
       <section className="relative flex min-h-[100svh] items-end overflow-hidden px-5 pb-20 pt-32">
         <Image src={EVENT.hero} alt={`${EVENT.bride} y ${EVENT.groom}`} fill priority className="absolute inset-0 object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#171f24]/85 via-[#171f24]/25 to-[#171f24]/10" />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-          animate={opened || reduceMotion ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative mx-auto w-full max-w-4xl text-center text-white"
         >
