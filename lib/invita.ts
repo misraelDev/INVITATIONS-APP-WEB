@@ -140,12 +140,6 @@ export const templates: InvitationTemplate[] = [
   },
 ]
 
-export const testimonials = [
-  { quote: "Nuestros invitados confirmaron en dos días. Todo se sintió nuestro desde el primer vistazo.", author: "Ana y Diego", event: "Boda en Valle de Bravo" },
-  { quote: "Pude cambiar colores, música y fotos desde el teléfono. Compartirla fue literalmente un mensaje.", author: "Marcela R.", event: "XV años de Renata" },
-  { quote: "Dejamos de responder las mismas preguntas: mapa, horario y regalos estaban en un solo lugar.", author: "Paola y Luis", event: "Baby shower" },
-]
-
 export function getTemplate(slug: string) {
   return templates.find((template) => template.slug === slug)
 }

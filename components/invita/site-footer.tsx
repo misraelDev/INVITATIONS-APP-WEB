@@ -11,7 +11,7 @@ export function SiteFooter() {
         </div>
         <div className="grid grid-cols-2 gap-4 text-sm text-white/70">
           <Link href="/plantillas">Plantillas</Link>
-          <Link href="/#opiniones">Opiniones</Link>
+          <Link href="/plantillas/jardin-eterno">Ver demostración</Link>
           <Link href="/#precios">Precios</Link>
           <Link href="/editor/jardin-eterno">Crear invitación</Link>
         </div>
