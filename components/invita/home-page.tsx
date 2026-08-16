@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, CalendarPlus, CheckCircle2, Link2, MapPin, MessageCircle, Music2, Palette, Smartphone, UsersRound } from "lucide-react"
+import { ArrowRight, CalendarPlus, CheckCircle2, MessageCircle, Palette, UsersRound } from "lucide-react"
 import { SiteHeader } from "./site-header"
 import { SiteFooter } from "./site-footer"
 import { Reveal } from "./reveal"
@@ -10,10 +10,6 @@ import { templates, testimonials } from "@/lib/invita"
 
 const quickBenefits = [
   [Palette, "Personaliza en minutos"], [UsersRound, "Confirma con RSVP"], [MessageCircle, "Comparte por WhatsApp"], [CalendarPlus, "Ubicación y calendario"],
-]
-
-const features = [
-  [UsersRound, "RSVP y acompañantes"], [MapPin, "Google Maps"], [CalendarPlus, "Agregar al calendario"], [Music2, "Música opcional"], [Smartphone, "Diseño responsivo"], [Link2, "Enlace personalizado"],
 ]
 
 export function HomePage() {
@@ -50,10 +46,6 @@ export function HomePage() {
           {[{name:"Elegante",img:templates[0].image,cls:"md:col-span-2 md:row-span-2"},{name:"Floral",img:templates[1].image,cls:"md:col-span-2"},{name:"Minimalista",img:templates[3].image,cls:""},{name:"Moderno",img:templates[4].image,cls:""}].map((item)=><Link key={item.name} href={`/plantillas?estilo=${item.name}`} className={`group relative overflow-hidden rounded-[1.75rem] ${item.cls}`}><Image src={item.img} alt={`Colección ${item.name}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"/><span className="absolute bottom-5 left-5 font-serif text-3xl text-white">{item.name}</span></Link>)}
         </div></Reveal>
       </section>
-
-      <section id="como-funciona" className="bg-[#ded8ce] px-6 py-24 md:py-32"><div className="mx-auto max-w-7xl"><Reveal><p className="eyebrow">Cómo funciona</p><h2 className="mt-5 max-w-3xl font-serif text-5xl leading-none md:text-7xl">De la idea al “sí, ahí estaré”.</h2></Reveal><div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] bg-black/10 md:grid-cols-3">{[["01","Elige","Encuentra una plantilla que hable el idioma de tu celebración."],["02","Hazla tuya","Cambia textos, colores, fotografías y música desde cualquier dispositivo."],["03","Comparte","Publica tu enlace y recibe confirmaciones en un solo lugar."]].map(([n,title,text],i)=><Reveal key={n} delay={i*.08} className="bg-[#f4f0e8] p-8 md:min-h-[330px]"><span className="text-xs tracking-[.2em] text-primary">{n}</span><h3 className="mt-24 font-serif text-4xl">{title}</h3><p className="mt-4 max-w-xs text-sm leading-6 text-muted-foreground">{text}</p></Reveal>)}</div></div></section>
-
-      <section id="caracteristicas" className="bg-[#fffdf8] px-6 py-24 md:py-32"><div className="mx-auto max-w-7xl"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><Reveal><p className="eyebrow">Cada detalle, resuelto</p><h2 className="mt-5 font-serif text-5xl leading-none md:text-7xl">Menos logística.<br/>Más emoción.</h2></Reveal><div className="grid gap-4 sm:grid-cols-2">{features.map(([Icon,title],i)=><Reveal key={title as string} delay={i*.05} className="rounded-3xl border border-black/10 p-6"><Icon className="size-6 text-primary"/><h3 className="mt-12 font-serif text-2xl">{title as string}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Incluido y listo para personalizar en tu invitación.</p></Reveal>)}</div></div></div></section>
 
       <section className="bg-[#211f1c] px-6 py-24 md:py-32"><div className="mx-auto max-w-7xl"><InvitationDemo/></div></section>
 
