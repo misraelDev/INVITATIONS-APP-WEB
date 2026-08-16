@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760" role="img" aria-labelledby="title desc">
+  <title id="title">Cohete de la misión</title>
+  <desc id="desc">Ilustración original de un cohete violeta despegando entre planetas</desc>
+  <defs>
+    <linearGradient id="ship" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#d8d3ff"/></linearGradient>
+    <linearGradient id="window" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8f7cff"/><stop offset="1" stop-color="#071426"/></linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".45" stop-color="#5a3de2"/><stop offset="1" stop-color="#5a3de2" stop-opacity="0"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g opacity=".9"><circle cx="95" cy="160" r="48" fill="#5a3de2"/><ellipse cx="95" cy="160" rx="78" ry="18" fill="none" stroke="#fff" stroke-width="9" transform="rotate(-18 95 160)"/><circle cx="527" cy="242" r="34" fill="#8f7cff"/><circle cx="492" cy="80" r="9" fill="#fff"/><circle cx="130" cy="360" r="8" fill="#fff"/></g>
+  <g transform="rotate(9 320 380)">
+    <path d="M310 88c-89 83-121 209-102 370l102 86 102-86c19-161-13-287-102-370z" fill="url(#ship)" stroke="#6750e8" stroke-width="12"/>
+    <path d="M310 88c-37 35-65 76-83 125h166c-18-49-46-90-83-125z" fill="#6750e8"/>
+    <circle cx="310" cy="300" r="68" fill="#0b1931" stroke="#6750e8" stroke-width="14"/><circle cx="310" cy="300" r="48" fill="url(#window)"/><path d="M273 278c21-18 45-24 73-17" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".6"/>
+    <path d="M210 408c-53 33-83 78-89 135l90-29 45-62zM410 408c53 33 83 78 89 135l-90-29-45-62z" fill="#5a3de2" stroke="#5a3de2" stroke-width="10"/>
+    <path d="M261 515h98l-18 70h-62z" fill="#071426"/>
+    <path d="M279 567c-17 58-6 112 31 162 37-50 48-104 31-162z" fill="url(#flame)" filter="url(#glow)"/>
+    <path d="M296 567c-8 45-3 83 14 115 17-32 22-70 14-115z" fill="#fff"/>
+    <path d="M310 394v74" stroke="#6750e8" stroke-width="10"/><path d="M274 431h72" stroke="#6750e8" stroke-width="10"/>
+  </g>
+</svg>
