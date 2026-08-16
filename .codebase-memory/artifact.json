@@ -1,0 +1,11 @@
+{
+    "schema_version": 2,
+    "commit": "",
+    "indexed_at": "2026-08-16T01:25:54Z",
+    "project": "amber-invitations",
+    "nodes": 651,
+    "edges": 1894,
+    "original_size": 3342336,
+    "compressed_size": 458371,
+    "compression_level": 9
+}

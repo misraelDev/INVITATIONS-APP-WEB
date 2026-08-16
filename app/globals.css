@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --background: #f4f0e8;
+  --foreground: #211f1c;
+  --card: #fffdf8;
+  --card-foreground: #211f1c;
+  --popover: #fffdf8;
+  --popover-foreground: #211f1c;
+  --primary: #6d2f3f;
+  --primary-foreground: #fffdf8;
+  --secondary: #ded8ce;
+  --secondary-foreground: #211f1c;
+  --muted: #e9e4db;
+  --muted-foreground: #6f6a63;
+  --accent: #786b52;
+  --accent-foreground: #fffdf8;
+  --destructive: #a33d3d;
+  --destructive-foreground: #fffdf8;
+  --border: #d8d1c6;
+  --input: #fffdf8;
+  --ring: #6d2f3f;
+  --radius: 1rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground antialiased; }
+  button, a, input, select, textarea, summary { @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary; }
+  ::selection { background: #6d2f3f; color: #fffdf8; }
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
