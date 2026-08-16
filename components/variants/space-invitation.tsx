@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { Check, Copy, MapPin, MessageCircle, Orbit, Rocket, Satellite, Sparkles } from "lucide-react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Check, Copy, MapPin, MessageCircle, Orbit, Satellite, Sparkles } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const MISSION = {
@@ -31,7 +31,6 @@ function calculateCountdown(): Countdown {
 
 export function SpaceInvitation() {
   const reduceMotion = useReducedMotion()
-  const [launched, setLaunched] = useState(false)
   const [countdown, setCountdown] = useState<Countdown>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [addressCopied, setAddressCopied] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
@@ -57,39 +56,19 @@ export function SpaceInvitation() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#071426_0%,#071426_24%,#5a3de2_52%,#071426_78%,#5a3de2_100%)] text-white">
-      <AnimatePresence>
-        {!launched && (
-          <motion.section exit={{ opacity: 0 }} transition={{ duration: 0.7 }} className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-[#071426] px-5">
-            <div className="absolute inset-0 bg-[url('/variants/space/stars.svg')] bg-[length:240px_240px] opacity-50" />
-            <motion.div animate={reduceMotion ? undefined : { rotate: 360 }} transition={{ duration: 35, repeat: Number.POSITIVE_INFINITY, ease: "linear" }} className="absolute size-[620px] rounded-full border border-dashed border-white/15" />
-            <div className="relative text-center">
-              <motion.div initial={reduceMotion ? false : { scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="relative mx-auto grid size-80 place-items-center rounded-full border border-white/20 bg-transparent shadow-[0_0_90px_rgba(255,255,255,.12)] sm:size-[390px]">
-                <div className="absolute inset-5 rounded-full border border-dashed border-white/25" />
-                <div className="absolute inset-12 rounded-full border border-white/20" />
-                <Image src="/variants/space/mission-badge.svg" alt="Insignia de Misión Espacial" width={520} height={520} priority className="w-52 sm:w-64" />
-                <div className="absolute inset-x-0 bottom-14"><p className="text-[9px] font-bold uppercase tracking-[.35em] text-white/60">Acceso autorizado</p><p className="mt-2 text-sm font-semibold">Comandante {MISSION.commander}</p></div>
-              </motion.div>
-              <motion.button whileHover={reduceMotion ? undefined : { scale: 1.05 }} whileTap={{ scale: 0.96 }} onClick={() => setLaunched(true)} type="button" className="relative -mt-7 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/10 px-7 py-4 text-sm font-black uppercase tracking-[.1em] text-white shadow-[0_0_35px_rgba(255,255,255,.1)] backdrop-blur-sm">
-                <Rocket className="size-5" /> Iniciar misión
-              </motion.button>
-            </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
-
       <div className="pointer-events-none absolute inset-0 bg-[url('/variants/space/stars.svg')] bg-[length:240px_240px] opacity-20" aria-hidden="true" />
 
       <section className="relative flex min-h-[100svh] items-center overflow-hidden px-5 py-24">
         <div className="absolute left-[-12rem] top-[15%] size-[30rem] rounded-full bg-[#5a3de2]/20 blur-3xl" />
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 lg:grid-cols-[1fr_.85fr]">
-          <motion.div initial={reduceMotion ? false : { opacity: 0, x: -35 }} animate={launched || reduceMotion ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.15 }}>
+          <motion.div initial={reduceMotion ? false : { opacity: 0, x: -35 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.15 }}>
             <span className="inline-flex items-center gap-2 rounded-full border border-[#a99cff]/25 bg-[#a99cff]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[.22em] text-[#a99cff]"><Satellite className="size-3.5" />Transmisión entrante</span>
             <p className="mt-8 text-sm font-bold uppercase tracking-[.32em] text-white/50">Misión 08 · Órbita de cumpleaños</p>
             <h1 className="mt-5 max-w-4xl text-[clamp(4.3rem,11vw,9.5rem)] font-black leading-[.76] tracking-[-.075em]">LÍA<br/><span className="text-[#a99cff]">AL ESPACIO</span></h1>
             <p className="mt-8 max-w-xl text-lg leading-8 text-white/65">La comandante Lía cumple {MISSION.age} años y necesita una tripulación extraordinaria para despegar.</p>
             <a href="#launch" className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#5a3de2] px-6 py-3.5 text-sm font-black uppercase tracking-wide transition-transform hover:-translate-y-1">Consultar coordenadas <Orbit className="size-5" /></a>
           </motion.div>
-          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 45 }} animate={launched || reduceMotion ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, delay: 0.3 }} className="relative mx-auto w-full max-w-[520px]">
+          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 45 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.3 }} className="relative mx-auto w-full max-w-[520px]">
             <div className="absolute inset-12 rounded-full border border-dashed border-[#a99cff]/30" />
             <motion.div animate={reduceMotion ? undefined : { rotate: [0, 2, 0, -2, 0] }} transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}><Image src="/variants/space/rocket.svg" alt="Cohete de la misión de Lía" width={620} height={760} priority className="relative w-full drop-shadow-[0_30px_35px_rgba(90,61,226,.25)]" /></motion.div>
           </motion.div>

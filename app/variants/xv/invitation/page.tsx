@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import { XvWelcome } from "@/components/variants/xv-welcome"
+import { XvInvitation } from "@/components/variants/xv-invitation"
 
 export const metadata: Metadata = {
   title: "Mis XV años · Valentina | Invitación",
   description: "Acompaña a Valentina a celebrar sus XV años.",
 }
 
-export default function XvVariantPage() {
-  return <XvWelcome />
+export default function XvInvitationPage() {
+  return <XvInvitation />
 }

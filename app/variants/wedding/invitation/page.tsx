@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import { WeddingWelcome } from "@/components/variants/wedding-welcome"
+import { WeddingInvitation } from "@/components/variants/wedding-invitation"
 
 export const metadata: Metadata = {
   title: "Fernanda & Rodrigo | Invitación de Boda",
   description: "Acompáñanos a celebrar la boda de Fernanda y Rodrigo.",
 }
 
-export default function WeddingVariantPage() {
-  return <WeddingWelcome />
+export default function WeddingInvitationPage() {
+  return <WeddingInvitation />
 }
